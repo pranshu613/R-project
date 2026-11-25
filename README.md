@@ -59,7 +59,7 @@ Indian stocks use the `.BSE` suffix there (for example `RELIANCE.BSE`). Check th
 2. Leave the settings as they are. `vercel.json` already sets the output folder to `web` and skips the build.
 3. Press **Deploy**.
 
-Each daily data commit redeploys the site automatically. After this, replace `pranshu613`, `R-project` and `closing-bell-liard` in this README with your real names.
+Each daily data commit redeploys the site automatically.
 
 Notes:
 - The workflow commits as the repository owner, because the Vercel Hobby plan does not deploy commits from other authors.
