@@ -1,5 +1,0 @@
-The CSV files in this folder are synthetic demo data (random price paths).
-They are not real market prices.
-
-While this file exists, the page shows a "sample data" note.
-Replace the CSV files with real ones (see README.md) and delete this file.
