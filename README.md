@@ -3,7 +3,7 @@
 A stock analysis dashboard for Indian large-cap stocks. **R** calculates returns, volatility, drawdown, Sharpe ratio and correlations. **HTML, CSS and JavaScript** show them. Prices refresh by themselves every day.
 
 [![Live demo](https://img.shields.io/badge/live%20demo-open-2ea44f)](https://YOUR-PROJECT.vercel.app)
-[![Daily refresh](https://github.com/YOUR-USERNAME/YOUR-REPO/actions/workflows/refresh-data.yml/badge.svg)](https://github.com/YOUR-USERNAME/YOUR-REPO/actions/workflows/refresh-data.yml)
+[![Daily refresh](https://github.com/pranshu613/R-project/actions/workflows/refresh-data.yml/badge.svg)](https://github.com/pranshu613/R-project/actions/workflows/refresh-data.yml)
 
 **Live demo: <https://YOUR-PROJECT.vercel.app>**
 
@@ -59,7 +59,7 @@ Indian stocks use the `.BSE` suffix there (for example `RELIANCE.BSE`). Check th
 2. Leave the settings as they are. `vercel.json` already sets the output folder to `web` and skips the build.
 3. Press **Deploy**.
 
-Each daily data commit redeploys the site automatically. After this, replace `YOUR-USERNAME`, `YOUR-REPO` and `YOUR-PROJECT` in this README with your real names.
+Each daily data commit redeploys the site automatically. After this, replace `pranshu613`, `R-project` and `YOUR-PROJECT` in this README with your real names.
 
 Notes:
 - The workflow commits as the repository owner, because the Vercel Hobby plan does not deploy commits from other authors.
