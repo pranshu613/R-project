@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Closing Bell</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo"><i></i><i></i><i></i></span>
+        <span class="brand-name">Closing Bell</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#overview" data-page="overview">Overview</a>
+        <a href="#detail" data-page="detail">Stock detail</a>
+        <a href="#compare" data-page="compare">Compare</a>
+        <a href="#calculator" data-page="calculator">Calculator</a>
+      </nav>
+
+      <button id="theme-button" class="button" type="button">Switch to dark</button>
+    </aside>
+
+    <main>
+      <p id="notice" class="notice" hidden></p>
+      <div id="error" class="error" role="alert" hidden></div>
+
+      <section id="page-overview" hidden>
+        <h1>Overview</h1>
+        <p id="overview-summary" class="intro"></p>
+
+        <div class="panel">
+          <div class="scroll">
+            <table id="stock-table">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <details class="glossary">
+            <summary>What do these columns mean?</summary>
+            <dl>
+              <dt>1 day / 1 year</dt>
+              <dd>How much the price changed since the previous close, and over the last 252 trading days.</dd>
+              <dt>Volatility</dt>
+              <dd>How much the price typically swings over a year. Higher means a bumpier ride.</dd>
+              <dt>Worst drop</dt>
+              <dd>The biggest fall from a previous high point in the period.</dd>
+              <dt>Sharpe</dt>
+              <dd>Return earned for each unit of risk, after subtracting a risk-free rate. Higher is better.</dd>
+              <dt>Rank</dt>
+              <dd>Position by 1-year return, where 1 is the best.</dd>
+            </dl>
+          </details>
+        </div>
+
+        <div class="panel">
+          <h2>How the stocks move together</h2>
+          <p class="help">Correlation of daily returns. 1 means they move in step, 0 means unrelated, and below 0 means they tend to move in opposite directions.</p>
+          <div class="scroll">
+            <table id="heatmap"></table>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-detail" hidden>
+        <div class="page-top">
+          <div>
+            <h1>Stock detail</h1>
+            <p id="detail-intro" class="intro"></p>
+          </div>
+          <div class="controls">
+            <label>Stock <select id="detail-select"></select></label>
+            <div id="detail-ranges" class="buttons" role="group" aria-label="Date range"></div>
+          </div>
+        </div>
+
+        <dl id="detail-stats" class="stats"></dl>
+
+        <div class="panel">
+          <div id="detail-legend" class="legend"></div>
+          <div class="chart">
+            <canvas id="price-chart" role="img"></canvas>
+            <div class="tooltip" hidden></div>
+          </div>
+
+          <h2>Drop from the highest price so far</h2>
+          <div class="chart">
+            <canvas id="drawdown-chart" role="img"></canvas>
+            <div class="tooltip" hidden></div>
+          </div>
+
+          <details class="data-view">
+            <summary>View the data as a table</summary>
+            <div id="detail-table" class="scroll"></div>
+          </details>
+        </div>
+      </section>
+
+      <section id="page-compare" hidden>
+        <div class="page-top">
+          <div>
+            <h1>Compare</h1>
+            <p id="compare-intro" class="intro"></p>
+          </div>
+          <div class="controls">
+            <label>First <select id="compare-a"></select></label>
+            <label>Second <select id="compare-b"></select></label>
+            <div id="compare-ranges" class="buttons" role="group" aria-label="Date range"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div id="compare-legend" class="legend"></div>
+          <div class="chart">
+            <canvas id="compare-chart" role="img"></canvas>
+            <div class="tooltip" hidden></div>
+          </div>
+          <p id="compare-note" class="help"></p>
+          <details class="data-view">
+            <summary>View the data as a table</summary>
+            <div id="compare-data" class="scroll"></div>
+          </details>
+        </div>
+
+        <div class="panel">
+          <div class="scroll">
+            <table id="compare-table"></table>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-calculator" hidden>
+        <h1>Investment calculator</h1>
+        <p class="intro">See how a monthly SIP or a one-time investment could grow. This runs entirely in your browser.</p>
+
+        <div class="calculator">
+          <form id="calc-form" class="panel" autocomplete="off">
+            <div id="calc-mode" class="buttons" role="group" aria-label="Investment type"></div>
+
+            <label class="field">
+              <span id="calc-amount-label">Monthly amount (₹)</span>
+              <input id="calc-amount" type="number" inputmode="decimal" min="100" max="100000000" step="any" value="10000" required>
+            </label>
+            <label class="field">
+              <span>Expected return per year (%)</span>
+              <input id="calc-rate" type="number" inputmode="decimal" min="0" max="40" step="any" value="12" required>
+            </label>
+            <label class="field">
+              <span>Time (years)</span>
+              <input id="calc-years" type="number" inputmode="numeric" min="1" max="40" step="1" value="10" required>
+            </label>
+            <p id="calc-message" class="help" role="status"></p>
+          </form>
+
+          <div>
+            <dl id="calc-stats" class="stats"></dl>
+            <div class="panel">
+              <div id="calc-legend" class="legend"></div>
+              <div class="chart">
+                <canvas id="calc-chart" role="img"></canvas>
+                <div class="tooltip" hidden></div>
+              </div>
+              <p class="help">A projection that assumes the same return every year. Real markets move up and down, so actual results will differ.</p>
+              <details class="data-view">
+                <summary>View the data as a table</summary>
+                <div id="calc-data" class="scroll"></div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="footer"></footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
